@@ -1,0 +1,279 @@
+/*------------------ GENERAL ---------------*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+}
+
+main {
+    background-color: #D89B00;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+main h1 {
+    text-align: center;
+}
+
+/*-------------------CARRUSEL------------------*/
+#carrusel {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carrusel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+#imagen-carrusel {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/*-------------------RUTAS------------------*/
+#rutas {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.rutas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.ruta {
+    display: flex;
+    flex-direction: column;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.ruta-imagenes {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    justify-content: center;
+}
+
+.ruta-imagenes img {
+    height: 150px;
+    border-radius: 5px;
+}
+
+.ruta h3 {
+    margin: 10px 0;
+}
+
+.ruta a {
+    color: #103F91;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ruta p {
+    color: #333;
+    text-align: justify;
+}
+
+/*-------------------BIBLIOGRAFÍA------------------*/
+#ia {
+    margin-top: 40px;
+}
+
+#ia h2 {
+    text-align: left;
+    padding-left: 10px;
+    text-decoration: underline;
+}
+
+.consultas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.consulta {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.consulta-imagenes {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    justify-content: center;
+}
+
+.consulta-imagenes img {
+    height: 300px;
+    border-radius: 5px;
+}
+
+.consulta h3 {
+    margin: 10px 0;
+    color: #103F91;
+    font-weight: bold;
+}
+
+.consulta p {
+    color: #333;
+    background: #F3F3F3;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+
+/*-------------------HEADER------------------*/
+/* Estilos generales del header */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #103F91;
+    padding: 10px 20px;
+}
+
+#logo a {
+    display: flex;
+    align-items: center;
+}
+
+#logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+#logo h1 {
+    color: white;
+    font-size: 1.5em;
+}
+
+/* Estilos del nav */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+}
+
+nav ul li {
+    position: relative;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+nav ul li:hover {
+    background-color: #0364B8;
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    background-color: #0D326F;
+    padding: 10px;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+}
+
+nav ul li>a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li ul li {
+    padding: 5px 10px;
+    white-space: nowrap;
+}
+
+nav ul li ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li:hover>ul {
+    display: block;
+}
+
+/*-------------------FOOTER------------------*/
+#footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #103F91;
+    color: white;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-left img {
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.footer-left h2 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.footer-center p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.footer-right a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    font-size: 0.9em;
+}
+
+.footer-right a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    #footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+        align-items: center;
+    }
+}
+

@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Añadimos esto para que padding no afecte el tamaño total */
+}
+
+body {
+    width: 100%;
+    height: 100vh; /* Cambiamos a vh para que ocupe toda la pantalla */
+    overflow: hidden;
+}
+
+main {
+    background-color: #D89B00;
+    width: 100%;
+    min-height: 100vh;
+    display: flex; /* Añadimos flex para centrar el contenido */
+    justify-content: center;
+    align-items: center;
+}
+
+/*-------------------REGISTRO------------------*/
+.registro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 100vh; /* Limitamos la altura máxima al viewport */
+    padding: 20px;
+    gap: 40px;
+    flex-wrap: wrap; /* Para que sea responsive en pantallas pequeñas */
+    overflow-y: auto; /* Permitimos scroll vertical si el contenido excede */
+}
+
+.registro-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Cambiamos a flex-start para que comience arriba */
+    align-items: center;
+    background: #f8f8f8;
+    padding: 20px; /* Reducimos el padding para ganar espacio */
+    border-radius: 10px;
+    min-width: 300px; /* Tamaño mínimo para el formulario */
+    max-width: 400px; /* Límite máximo para que no crezca demasiado */
+    max-height: 90vh; /* Limitamos la altura máxima */
+}
+
+.registro-left h1 {
+    color: #103F91;
+    margin-bottom: 15px; /* Reducimos el margen para ahorrar espacio */
+    font-size: 1.5em; /* Tamaño más controlado */
+}
+
+.registro-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 40%;
+}
+
+.registro-right #logo img {
+    max-width: 75%;
+    margin-right: 0; /* Quitamos el margen derecho del header */
+    position: rigth;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px; /* Reducimos el margen para que quepa más */
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em; /* Tamaño más pequeño para ahorrar espacio */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px; /* Reducimos el padding para que los inputs sean más compactos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em; /* Tamaño más pequeño */
+}
+
+button {
+    width: 100%;
+    padding: 10px; /* Reducimos un poco el padding */
+    background-color: #103F91;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em; /* Tamaño más pequeño */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0364B8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .registro-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .registro-right #logo img {
+        height: 200px; /* Reducimos el tamaño del logo en pantallas pequeñas */
+        max-width: 100%; /* Aseguramos que no exceda el contenedor */
+    }
+
+    .registro-left {
+        padding: 15px; /* Aún menos padding en móviles */
+        max-width: 100%; /* Permitimos que ocupe todo el ancho en móviles */
+        max-height: 70vh; /* Reducimos más la altura en móviles */
+    }
+
+    .form-group {
+        margin-bottom: 10px; /* Más compacto en móviles */
+    }
+}
