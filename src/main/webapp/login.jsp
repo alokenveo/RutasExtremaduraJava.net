@@ -19,7 +19,7 @@
             </div>
             <div class="login-right">
                 <h1>Iniciar Sesión</h1>
-                <form action="loginServlet" method="POST"> <!-- Ajusta la acción al servlet que procesa el login -->
+                <form action="UsuarioController" method="POST">
                     <div class="form-group">
                         <label for="username">Usuario:</label>
                         <input type="text" id="username" name="username" required>
@@ -29,6 +29,11 @@
                         <input type="password" id="password" name="password" required>
                     </div>
                     <button type="submit">Entrar</button>
+                    <input type="hidden" name="action" value="UsuarioLogin" />
+                    
+                    <p class="registro-link">
+                        ¿No tienes una cuenta? <a href="<%= request.getContextPath() %>/registro.jsp">Regístrate aquí</a>
+                    </p>
                 </form>
                 <% 
                     String error = (String) request.getAttribute("error");

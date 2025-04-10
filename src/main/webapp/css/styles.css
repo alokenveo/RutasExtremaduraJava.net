@@ -204,12 +204,18 @@ nav ul li>a {
     text-decoration: none;
 }
 
+
 nav ul li ul li {
     padding: 5px 10px;
     white-space: nowrap;
 }
 
 nav ul li ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.link-form a{
     color: white;
     text-decoration: none;
 }

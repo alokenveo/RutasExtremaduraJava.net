@@ -1,5 +1,6 @@
 package es.unex.cum.tw.rutas.model;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Ruta {
@@ -7,6 +8,7 @@ public class Ruta {
 	private String nombre;
 	private String descripcion;
 	private String enlace;
+	private Date fechaIncorporacion;
 	private int maximoUsuario;
 	private int dificultad;
 	private int metros;
@@ -16,16 +18,29 @@ public class Ruta {
 	public Ruta() {
 	}
 
-	public Ruta(int idRuta, String nombre, String descripcion, String enlace, int maximoUsuario, int dificultad,
-			int metros, List<String> fotos) {
+	public Ruta(int idRuta, String nombre, String descripcion, String enlace, Date fechaIncorporacion,
+			int maximoUsuario, int dificultad, int metros, List<String> fotos) {
 		this.idRuta = idRuta;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.enlace = enlace;
+		this.fechaIncorporacion = fechaIncorporacion;
 		this.maximoUsuario = maximoUsuario;
 		this.dificultad = dificultad;
 		this.metros = metros;
 		this.fotos = fotos;
+	}
+	
+	public Ruta(int idRuta, String nombre, String descripcion, String enlace, Date fechaIncorporacion,
+			int maximoUsuario, int dificultad, int metros) {
+		this.idRuta = idRuta;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.enlace = enlace;
+		this.fechaIncorporacion = fechaIncorporacion;
+		this.maximoUsuario = maximoUsuario;
+		this.dificultad = dificultad;
+		this.metros = metros;
 	}
 
 	public int getIdRuta() {
@@ -58,6 +73,14 @@ public class Ruta {
 
 	public void setEnlace(String enlace) {
 		this.enlace = enlace;
+	}
+
+	public Date getFechaIncorporacion() {
+		return fechaIncorporacion;
+	}
+
+	public void setFechaIncorporacion(Date fechaIncorporacion) {
+		this.fechaIncorporacion = fechaIncorporacion;
 	}
 
 	public int getMaximoUsuario() {

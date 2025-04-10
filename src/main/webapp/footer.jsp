@@ -13,7 +13,7 @@
         <a href="mailto:alokenveo@alumnos.unex.es">
             <i class="bi bi-envelope-fill"></i> Contacto: Alfredo Mituy Okenve
         </a>
-        <a href="https://github.com/alokenveo/RutasExtremadura.net" target="_blank">
+        <a href="https://github.com/alokenveo/RutasExtremaduraJava.net" target="_blank">
             <i class="bi bi-github"></i> Repositorio GitHub
         </a>
     </div>

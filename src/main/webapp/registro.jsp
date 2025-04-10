@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse | Rutas Extremadura.net</title>
-    <link rel="stylesheet" href="css/styles_registro.css"> <!-- Asegúrate de que la ruta al CSS sea correcta -->
+    <link rel="stylesheet" href="css/styles_registro.css">
 </head>
 <body>
     <main>
         <div class="registro-container">
             <div class="registro-left">
                 <h1>Registrarse</h1>
-                <form action="registroServlet" method="POST"> <!-- Ajusta la acción al servlet que procesa el registro -->
+                <form action="UsuarioController" method="POST"> <!-- Ajusta la acción al servlet que procesa el registro -->
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
@@ -38,6 +38,11 @@
                         <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
                     </div>
                     <button type="submit">Registrarse</button>
+                    <input type="hidden" name="action" value="UsuarioAlta" />
+
+                    <p class="login-link">
+                        ¿Ya tienes una cuenta? <a href="<%= request.getContextPath() %>/login.jsp">Inicia sesión aquí</a>
+                    </p>
                 </form>
                 <% 
                     String error = (String) request.getAttribute("error");

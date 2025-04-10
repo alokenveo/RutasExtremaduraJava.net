@@ -1,6 +1,6 @@
 <div id="header">
     <div id="logo">
-        <a href="<%= request.getContextPath() %>/index.jsp" title="Ir a la pï¿½gina principal">
+        <a href="<%= request.getContextPath() %>" title="Ir a la pï¿½gina principal">
             <img src="img/logo.png" alt="Logo Portal">
             <h1>Rutas Extremadura.net</h1>
         </a>
@@ -20,10 +20,36 @@
                 Conecta4
                 <ul>
                     <li><a href="<%= request.getContextPath() %>/src/html/conecta4.jsp">Jugar Conecta4</a></li>
-                    <li><a href="<%= request.getContextPath() %>/src/html/historial.jsp">Histórico de Puntuaciones</a></li>
+                    <li><a href="<%= request.getContextPath() %>/src/html/historial.jsp">Histï¿½rico de Puntuaciones</a></li>
                 </ul>
             </li>
-            <li><a href="/src/html/bibliografia.jsp">Bibliografía</a></li>
+            <li><a href="/src/html/bibliografia.jsp">Bibliografï¿½a</a></li>
+
+            <%
+            if (session.getAttribute("username").equals("admin"))   {
+            %>
+                    <li>
+                        <form class="link-form" id="form-admin" action="UsuarioController" method="get">
+                            <a href="javascript:;" onclick="document.getElementById('form-admin').submit()">Adminstrador</a>
+                            <input type="hidden" name="action" value="UsuarioAdmin"/>
+                        </form>
+                    </li>  
+            <%} %>
+
+            <li>
+                <i class="bi bi-person-circle" style="width: 50px;"></i>
+                <ul>
+                    <li><a href="<%= request.getContextPath() %>/src/html/conecta4.jsp">Perfil de usuario</a></li>
+                    <li>
+                        <form action="UsuarioController" method="POST" style="display: inline;">
+                            <input type="hidden" name="action" value="UsuarioLogout" />
+                            <button type="submit" style="background: none; border: none; padding: 0; color: inherit; font: inherit; cursor: pointer;">
+                                <i class="bi bi-box-arrow-right"></i> Cerrar sesiÃ³n
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </div>

@@ -15,15 +15,25 @@ public class Usuario {
 
 	}
 
-	public Usuario(int i, String nombre, String apellidos, String email,
-			String username, String password, Date fechaNacimiento) {
-		id=i;
+	public Usuario(String nombre, String apellidos, String email, String username, String password,
+			Date fechaNacimiento) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.fechaNacimiento=fechaNacimiento;
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Usuario(int id, String nombre, String apellidos, String email, String username, String password,
+			Date fechaNacimiento) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public int getId() {

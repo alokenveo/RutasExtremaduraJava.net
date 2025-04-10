@@ -95,6 +95,22 @@ button:hover {
     background-color: #0364B8;
 }
 
+.registro-link {
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.registro-link a {
+    color: #103F91;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.registro-link a:hover {
+    text-decoration: underline;
+}
+
 .error-message {
     color: #D8000C;
     background-color: #FFD2D2;

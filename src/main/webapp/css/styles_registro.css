@@ -102,6 +102,32 @@ button:hover {
     background-color: #0364B8;
 }
 
+.login-link {
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.login-link a {
+    color: #103F91;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .registro-container {

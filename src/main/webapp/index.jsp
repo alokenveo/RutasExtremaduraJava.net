@@ -11,45 +11,48 @@
 </head>
 
 <body>
+    <%
+    if (session.getAttribute("nombre")==null)   {
+        response.sendRedirect("login.jsp");
+    } else {
+    %>
 
-    <!-- Cabecera -->
-    <%@ include file="header.jsp"%>
+        <!-- Cabecera -->
+        <%@ include file="header.jsp"%>
 
-    <main>
-        <section id="carrusel">
-            <div class="carrusel-container">
-                <img id="imagen-carrusel" src="" alt="Imagen del carrusel">
-            </div>
-        </section>
+        <main>
+            <section id="carrusel">
+                <div class="carrusel-container">
+                    <img id="imagen-carrusel" src="" alt="Imagen del carrusel">
+                </div>
+            </section>
 
-        <section id="rutas">
-            <h2>Rutas</h2>
-            <p>Estamos probando algo a ver si funciona</p>
-            <div class="rutas-container">
-                <%-- Aquí podrías iterar rutas desde el backend más adelante --%>
-                <%-- Ejemplo:
-                List<Ruta> rutas = (List<Ruta>) request.getAttribute("rutas");
-                if (rutas != null) {
-                    for (Ruta ruta : rutas) {
-                %>
-                        <div class="ruta">
-                            <h3><%= ruta.getNombre() %></h3>
-                            <p><%= ruta.getDescripcion() %></p>
-                        </div>
-                <%
+            <section id="rutas">
+                <h2>Rutas</h2>
+                <p>Estamos probando algo a ver si funciona</p>
+                <div class="rutas-container">
+                    <%-- Aquí podrías iterar rutas desde el backend más adelante --%>
+                    <%-- Ejemplo:
+                    List<Ruta> rutas = (List<Ruta>) request.getAttribute("rutas");
+                    if (rutas != null) {
+                        for (Ruta ruta : rutas) {
+                    %>
+                            <div class="ruta">
+                                <h3><%= ruta.getNombre() %></h3>
+                                <p><%= ruta.getDescripcion() %></p>
+                            </div>
+                    <%
+                        }
                     }
-                }
-                --%>
-            </div>
-        </section>
-    </main>
+                    --%>
+                </div>
+            </section>
+        </main>
 
-    <!-- Pie de página -->
-    <%@ include file="footer.jsp"%>
+        <!-- Pie de página -->
+        <%@ include file="footer.jsp"%>
 
-    <script src="/src/js/componentes.js"></script>
-    <script src="/src/js/carrusel.js"></script>
-    <script src="/src/js/rutas.js"></script>
+    <%} %>
 </body>
 
 </html>
