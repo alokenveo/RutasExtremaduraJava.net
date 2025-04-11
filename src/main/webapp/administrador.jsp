@@ -33,12 +33,51 @@
         </aside>
 
         <!-- Contenido dinámico -->
-        <div class="admin-content">
+        <div id="admin-content">
             <!-- Adminstrar rutas -->
             <section id="usuarios-admin" class="admin-section active">
                 <h2>Usuarios</h2>
                 <div class="admin-buttons">
-                    <button class="admin-button">Añadir usuario</button>
+                    <button class="admin-button" id="add-usuario">Añadir usuario</button>
+                </div>
+
+                <!-- Modal de añadir usuario -->
+                <div style="display: none;">
+                    <form action="UsuarioController" method="POST">
+                        <div class="group-form">
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidos">Apellidos:</label>
+                                <input type="text" id="apellidos" name="apellidos" required>
+                            </div>
+                        </div>
+                        <div class="group-form">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Usuario:</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                        </div>
+                        <div class="group-form">
+                            <div class="form-group">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                            </div>
+                        </div>
+
+                        <button type="submit">Añadir usuario</button>
+                        <input type="hidden" name="action" value="UsuarioAlta" />
+                    </form>
                 </div>
 
                 <div>
@@ -71,8 +110,6 @@
                                             <button type="submit" class="delete-button"><i class="bi bi-trash text-danger"></i></button>
                                         </form></td>
                                     </tr>
-                                    <!-- Modal de info reserva -->
-                                    <div style="display: none;"></div>
                                 <%
                                     }
                                 }

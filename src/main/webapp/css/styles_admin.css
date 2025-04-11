@@ -1,5 +1,5 @@
 /* Contenedor principal */
-.admin-main {
+#admin-main {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -39,7 +39,7 @@
 }
 
 /* Contenido dinámico */
-.admin-content {
+#admin-content {
     flex: 1;
     min-width: 0; /* Evita que el contenido se desborde */
 }
