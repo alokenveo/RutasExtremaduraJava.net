@@ -7,5 +7,7 @@ import es.unex.cum.tw.rutas.model.Ruta;
 public interface RutaService {
 	
 	public List<Ruta> obtenerRutas();
+	public boolean crearRuta(Ruta ruta);
+	public Ruta obtenerRutaPorId(String idRuta);
 	
 }

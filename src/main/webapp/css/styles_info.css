@@ -1,0 +1,174 @@
+/*-------------------INFO RUTA------------------*/
+#info-ruta {
+    width: 90%;
+    max-width: 1100px;
+    margin: 20px auto;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.info-ruta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ruta-detalles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ruta-detalles h2 {
+    color: #103F91;
+    font-size: 1.8em;
+}
+
+.ruta-detalles p {
+    color: #333;
+    text-align: justify;
+}
+
+.ruta-detalles p strong {
+    color: #103F91;
+}
+
+.info-adicional {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.info-adicional h3 {
+    font-size: 1.3em;
+    color: #103F91;
+    margin-bottom: 10px;
+}
+
+.info-adicional a {
+    color: #103F91;
+    font-weight: bold;
+}
+
+.info-adicional a:hover {
+    color: #0364B8;
+}
+
+.reserva-boton {
+    background-color: #103F91;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    align-self: flex-start;
+}
+
+.reserva-boton:hover {
+    background-color: #0364B8;
+}
+
+/*-------------------MODAL RESERVA------------------*/
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #103F91;
+}
+
+.modal-close:hover {
+    color: #0364B8;
+}
+
+.modal-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #103F91;
+}
+
+.grupo-campos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.campo {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo label {
+    font-weight: bold;
+    color: #333;
+}
+
+.servicios {
+    display: block;
+    margin: 5px 0;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons button[type="submit"] {
+    background-color: #103F91;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button[type="submit"]:hover {
+    background-color: #0364B8;
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #bbb;
+}

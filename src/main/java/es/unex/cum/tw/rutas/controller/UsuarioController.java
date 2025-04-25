@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import es.unex.cum.tw.rutas.model.Reserva;
+import es.unex.cum.tw.rutas.model.ReservaRuta;
 import es.unex.cum.tw.rutas.model.Ruta;
 import es.unex.cum.tw.rutas.model.Usuario;
 import es.unex.cum.tw.rutas.service.ReservaService;
@@ -38,12 +39,16 @@ public class UsuarioController extends HttpServlet {
 		String accion = req.getParameter("action");
 		if (accion.equals("UsuarioLogin")) {
 			login(req, res);
-		} else if (accion.equals("UsuarioAlta")) {
-			registrar(req, res);
+		} else if (accion.equals("UsuarioAltaNormal")) {
+			registroNormal(req, res);
+		} else if (accion.equals("UsuarioAltaAdmin")) {
+			registroAdmin(req, res);
 		} else if (accion.equals("UsuarioLogout")) {
 			logout(req, res);
 		} else if (accion.equals("UsuarioAdmin")) {
 			obtenerDatos(req, res);
+		}  else if (accion.equals("UsuarioPerfil")) {
+			obtenerDatosUsuario(req, res);
 		} else if (accion.equals("DeleteUsuario")) {
 			eliminarUsuario(req, res);
 		} else {
@@ -79,8 +84,26 @@ public class UsuarioController extends HttpServlet {
 		session.invalidate();
 		res.sendRedirect("login.jsp");
 	}
+	
+	public void registroNormal(HttpServletRequest req, HttpServletResponse res) throws ParseException, ServletException, IOException {
+		if(registrar(req, res)) {
+			req.setAttribute("mensaje", "Dado de alta correctamente");
+			req.getRequestDispatcher("./login.jsp").forward(req, res);
+		} else {
+			req.setAttribute("error", "El usuario ya existe");
+			req.getRequestDispatcher("./registro.jsp").forward(req, res);
+		}
+	}
+	public void registroAdmin(HttpServletRequest req, HttpServletResponse res) throws ParseException, ServletException, IOException {
+		if(registrar(req, res)) {
+			obtenerDatos(req, res);
+		} else {
+			req.setAttribute("error", "No se ha guardado el archivo");
+			req.getRequestDispatcher("./administrador.jsp").forward(req, res);
+		}
+	}
 
-	public void registrar(HttpServletRequest req, HttpServletResponse res)
+	public boolean registrar(HttpServletRequest req, HttpServletResponse res)
 			throws ParseException, ServletException, IOException {
 		String n = req.getParameter("nombre");
 		String apel = req.getParameter("apellidos");
@@ -89,25 +112,11 @@ public class UsuarioController extends HttpServlet {
 		String pass = req.getParameter("password");
 		Date fecha = Date.valueOf(req.getParameter("fechaNacimiento"));
 		Usuario usuario1 = new Usuario(n, apel, email, username, pass, fecha);
-
-		try {
-			boolean resultado = usuarioService.registrarUsuario(usuario1);
-			if (resultado) {
-				req.setAttribute("mensaje", "Dado de alta correctamente");
-				req.getRequestDispatcher("./login.jsp").forward(req, res);
-				return;
-			} else {
-				req.setAttribute("error", "El usuario ya existe");
-				req.getRequestDispatcher("./registro.jsp").forward(req, res);
-				return;
-			}
-		} catch (Exception e2) {
-			req.setAttribute("error", "Fallo en SQL");
-			req.getRequestDispatcher("./registro.jsp").forward(req, res);
-		}
+		
+		return usuarioService.registrarUsuario(usuario1);
 	}
 
-	public void obtenerDatos(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	private void obtenerDatos(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		List<Usuario> usuarios = usuarioService.obtenerUsuarios();
 		List<Ruta> rutas = rutaService.obtenerRutas();
 		List<Reserva> reservas = reservaService.obtenerReservas();
@@ -116,6 +125,18 @@ public class UsuarioController extends HttpServlet {
 		req.setAttribute("rutas", rutas);
 		req.setAttribute("reservas", reservas);
 		req.getRequestDispatcher("./administrador.jsp").forward(req, res);
+	}
+	
+	private void obtenerDatosUsuario(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		HttpSession session=req.getSession(true);
+		int idUsuario=Integer.parseInt((String)session.getAttribute("id"));
+		List<ReservaRuta> reservas = reservaService.obtenerReservasConRutaPorUsuario(idUsuario);
+		Usuario usuario=usuarioService.getUserByUserId(String.valueOf(idUsuario));
+		
+		
+		req.setAttribute("usuario", usuario);
+		req.setAttribute("reservas", reservas);
+		req.getRequestDispatcher("./perfil.jsp").forward(req, res);
 	}
 
 	public void eliminarUsuario(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

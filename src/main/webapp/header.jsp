@@ -9,19 +9,10 @@
     <nav>
         <ul>
             <li>
-                Secciones
-                <ul>
-                    <li><a href="<%= request.getContextPath() %>/index.jsp#rutas">Rutas</a></li>
-                    <li><a href="<%= request.getContextPath() %>/src/html/novedades.jsp">Novedades</a></li>
-                    <li><a href="<%= request.getContextPath() %>/src/html/reserva.jsp">Reserva</a></li>
-                </ul>
-            </li>
-            <li>
-                Conecta4
-                <ul>
-                    <li><a href="<%= request.getContextPath() %>/src/html/conecta4.jsp">Jugar Conecta4</a></li>
-                    <li><a href="<%= request.getContextPath() %>/src/html/historial.jsp">Hist�rico de Puntuaciones</a></li>
-                </ul>
+                <form class="link-form" id="form-ruta" action="RutaController" method="get">
+                    <a href="javascript:;" onclick="document.getElementById('form-ruta').submit()">Rutas</a>
+                    <input type="hidden" name="action" value="VerRutas"/>
+                </form>
             </li>
             <li><a href="/src/html/bibliografia.jsp">Bibliograf�a</a></li>
 
@@ -39,7 +30,12 @@
             <li>
                 <i class="bi bi-person-circle" style="width: 50px;"></i>
                 <ul>
-                    <li><a href="<%= request.getContextPath() %>/src/html/conecta4.jsp">Perfil de usuario</a></li>
+                    <li>
+                        <form class="link-form" id="form-admin" action="UsuarioController" method="get">
+                            <a href="javascript:;" onclick="document.getElementById('form-admin').submit()">Perfil de Usuario</a>
+                            <input type="hidden" name="action" value="UsuarioPerfil"/>
+                        </form>
+                    </li>
                     <li>
                         <form action="UsuarioController" method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="UsuarioLogout" />

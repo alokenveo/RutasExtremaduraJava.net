@@ -36,7 +36,7 @@ public class UsuarioServiceBD implements UsuarioService {
 			if (resultados.next() == false) {
 				return null;
 			} else {
-				user = new Usuario(Integer.parseInt(resultados.getString("id_usuario")), resultados.getString("Nombre"),
+				user = new Usuario(Integer.parseInt(resultados.getString("id_usuario")), resultados.getString("nombre"),
 						resultados.getString("apellidos"), resultados.getString("email"),
 						resultados.getString("username"), resultados.getString("password"),
 						resultados.getDate("fecha_nacimiento"));
@@ -62,14 +62,14 @@ public class UsuarioServiceBD implements UsuarioService {
 		Usuario user = null;
 		ResultSet resultados = null;
 		try {
-			String query = "SELECT * FROM usuarios where userId=?";
+			String query = "SELECT * FROM usuarios where id_usuario=?";
 			PreparedStatement sentencia = (PreparedStatement) Conexion.openConnection().prepareStatement(query);
 			sentencia.setString(1, userId);
 			resultados = sentencia.executeQuery();
 			if (resultados.next() == false) {
 				return null;
 			} else {
-				user = new Usuario(Integer.parseInt(resultados.getString("id")), resultados.getString("Nombre"),
+				user = new Usuario(Integer.parseInt(resultados.getString("id_usuario")), resultados.getString("nombre"),
 						resultados.getString("apellidos"), resultados.getString("email"),
 						resultados.getString("username"), resultados.getString("password"),
 						resultados.getDate("fecha_nacimiento"));
@@ -129,7 +129,7 @@ public class UsuarioServiceBD implements UsuarioService {
 
 		try {
 
-			String query = "INSERT INTO usuarios (nombre,apellidos,email,username,password,fecha_nacimiento) "
+			String query = "INSERT INTO usuarios(nombre,apellidos,email,username,password,fecha_nacimiento) "
 					+ "VALUES (?,?,?,?,?,?)";
 			PreparedStatement sentencia = (PreparedStatement) Conexion.openConnection().prepareStatement(query);
 			synchronized (sentencia) {
@@ -171,6 +171,40 @@ public class UsuarioServiceBD implements UsuarioService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Usuario getUserByUserEmail(String email) {
+		Usuario user = null;
+		ResultSet resultados = null;
+		try {
+			String query = "SELECT * FROM usuarios where email=?";
+			PreparedStatement sentencia = (PreparedStatement) Conexion.openConnection().prepareStatement(query);
+			sentencia.setString(1, email);
+			resultados = sentencia.executeQuery();
+
+			if (resultados.next() == false) {
+				return null;
+			} else {
+				user = new Usuario(Integer.parseInt(resultados.getString("id_usuario")), resultados.getString("nombre"),
+						resultados.getString("apellidos"), resultados.getString("email"),
+						resultados.getString("username"), resultados.getString("password"),
+						resultados.getDate("fecha_nacimiento"));
+
+				return user;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (resultados != null) {
+				try {
+					resultados.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, "No se pudo cerrar el Resulset", ex);
+				}
+			}
+		}
+		return user;
 	}
 
 }

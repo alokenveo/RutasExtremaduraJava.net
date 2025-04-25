@@ -1,0 +1,54 @@
+/*-------------------FILTRO RUTAS------------------*/
+#filtro-rutas {
+    width: 90%;
+    max-width: 1100px;
+    margin: 20px auto;
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.filtro-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #103F91;
+}
+
+.filtro-campos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo label {
+    font-weight: bold;
+    color: #333;
+}
+
+.campo input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 150px;
+}
+
+.filtro-boton {
+    background-color: #103F91;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.filtro-boton:hover {
+    background-color: #0364B8;
+}

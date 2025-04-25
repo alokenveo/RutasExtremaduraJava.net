@@ -38,7 +38,7 @@
                         <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
                     </div>
                     <button type="submit">Registrarse</button>
-                    <input type="hidden" name="action" value="UsuarioAlta" />
+                    <input type="hidden" name="action" value="UsuarioAltaNormal" />
 
                     <p class="login-link">
                         ¿Ya tienes una cuenta? <a href="<%= request.getContextPath() %>/login.jsp">Inicia sesión aquí</a>

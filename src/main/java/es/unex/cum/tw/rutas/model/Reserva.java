@@ -1,7 +1,6 @@
 package es.unex.cum.tw.rutas.model;
 
 import java.sql.Date;
-import java.util.List;
 
 public class Reserva {
 	private int idReserva;
@@ -13,13 +12,13 @@ public class Reserva {
 	private String puntoEncuentro;
 	private String alergias;
 	private String comentarios;
-	private List<String> serviciosExtras;
+	private String serviciosExtras;
 
 	public Reserva() {
 	}
 
 	public Reserva(int idReserva, int idUsuario, int idRuta, Date fecha, int personas, String horario,
-			String puntoEncuentro, String alergias, String comentarios, List<String> serviciosExtras) {
+			String puntoEncuentro, String alergias, String comentarios, String serviciosExtras) {
 		this.idReserva = idReserva;
 		this.idUsuario = idUsuario;
 		this.idRuta = idRuta;
@@ -29,7 +28,20 @@ public class Reserva {
 		this.puntoEncuentro = puntoEncuentro;
 		this.alergias = alergias;
 		this.comentarios = comentarios;
-		this.serviciosExtras=serviciosExtras;
+		this.serviciosExtras = serviciosExtras;
+	}
+
+	public Reserva(int idUsuario, int idRuta, Date fecha, int personas, String horario, String puntoEncuentro,
+			String alergias, String comentarios, String serviciosExtras) {
+		this.idUsuario = idUsuario;
+		this.idRuta = idRuta;
+		this.fecha = fecha;
+		this.personas = personas;
+		this.horario = horario;
+		this.puntoEncuentro = puntoEncuentro;
+		this.alergias = alergias;
+		this.comentarios = comentarios;
+		this.serviciosExtras = serviciosExtras;
 	}
 
 	public int getIdReserva() {
@@ -104,14 +116,12 @@ public class Reserva {
 		this.comentarios = comentarios;
 	}
 
-	public List<String> getServiciosExtras() {
+	public String getServiciosExtras() {
 		return serviciosExtras;
 	}
 
-	public void setServiciosExtras(List<String> serviciosExtras) {
+	public void setServiciosExtras(String serviciosExtras) {
 		this.serviciosExtras = serviciosExtras;
 	}
-	
-	
 
 }

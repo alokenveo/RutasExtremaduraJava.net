@@ -30,7 +30,18 @@ public class Ruta {
 		this.metros = metros;
 		this.fotos = fotos;
 	}
-	
+
+	public Ruta(String nombre, String descripcion, String enlace, int maximoUsuario, int dificultad, int metros,
+			List<String> fotos) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.enlace = enlace;
+		this.maximoUsuario = maximoUsuario;
+		this.dificultad = dificultad;
+		this.metros = metros;
+		this.fotos = fotos;
+	}
+
 	public Ruta(int idRuta, String nombre, String descripcion, String enlace, Date fechaIncorporacion,
 			int maximoUsuario, int dificultad, int metros) {
 		this.idRuta = idRuta;
@@ -38,6 +49,15 @@ public class Ruta {
 		this.descripcion = descripcion;
 		this.enlace = enlace;
 		this.fechaIncorporacion = fechaIncorporacion;
+		this.maximoUsuario = maximoUsuario;
+		this.dificultad = dificultad;
+		this.metros = metros;
+	}
+
+	public Ruta(String nombre, String descripcion, String enlace, int maximoUsuario, int dificultad, int metros) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.enlace = enlace;
 		this.maximoUsuario = maximoUsuario;
 		this.dificultad = dificultad;
 		this.metros = metros;
