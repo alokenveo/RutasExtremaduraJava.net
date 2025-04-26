@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles_info.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <%
-    if (session.getAttribute("nombre") == null) {
-        response.sendRedirect("login.jsp");
-    } else {
         Ruta ruta = (Ruta) request.getAttribute("ruta");
+        Double valoracionMedia = (Double) request.getAttribute("valoracionMedia");
+        Integer usuarioValoracion = (Integer) request.getAttribute("usuarioValoracion");
         if (ruta == null) {
             response.sendRedirect("rutas.jsp");
         } else {
@@ -48,6 +48,19 @@
                     <p><strong>Máximo de Usuarios:</strong> <%= ruta.getMaximoUsuario() %></p>
                     <p><strong>Dificultad:</strong> <%= ruta.getDificultad() %> (1-5)</p>
                     <p><strong>Metros:</strong> <%= ruta.getMetros() %> m</p>
+
+                    <div class="valoracion-container">
+                        <span class="valoracion-media">Valoración media: <span id="valoracion-media"><%= String.format("%.1f", valoracionMedia != null ? valoracionMedia : 0.0) %></span></span>
+                        <div class="estrellas" id="estrellas-valoracion">
+                            <i class="fas fa-star estrella" data-valor="1"></i>
+                            <i class="fas fa-star estrella" data-valor="2"></i>
+                            <i class="fas fa-star estrella" data-valor="3"></i>
+                            <i class="fas fa-star estrella" data-valor="4"></i>
+                            <i class="fas fa-star estrella" data-valor="5"></i>
+                        </div>
+                    </div>
+
+
                     <div class="info-adicional">
                         <h3>Información Adicional</h3>
                         <p><strong>Enlace:</strong> <a href="<%= ruta.getEnlace() %>" target="_blank">Visitar página de la ruta</a></p>
@@ -184,9 +197,73 @@
                     cerrarModalReserva();
                 }
             });
+
+
+            // Lógica para las estrellas de valoración
+            const estrellas = document.querySelectorAll('.estrella');
+            const valoracionMediaSpan = document.getElementById('valoracion-media');
+            let valoracionActual = <%= usuarioValoracion != null ? usuarioValoracion : 0 %>; // Valoración del usuario actual
+            const idRuta = <%= ruta.getIdRuta() %>;
+
+            // Mostrar la valoración del usuario al cargar la página
+            if (valoracionActual > 0) {
+                actualizarEstrellas(valoracionActual);
+            }
+
+            // Efecto hover: rellenar estrellas al pasar el cursor
+            estrellas.forEach(estrella => {
+                estrella.addEventListener('mouseover', () => {
+                    const valor = parseInt(estrella.getAttribute('data-valor'));
+                    actualizarEstrellas(valor);
+                });
+
+                // Restaurar la valoración actual al salir del hover
+                estrella.addEventListener('mouseout', () => {
+                    actualizarEstrellas(valoracionActual);
+                });
+
+                // Enviar valoración al hacer clic
+                estrella.addEventListener('click', () => {
+                    const valor = parseInt(estrella.getAttribute('data-valor'));
+                    enviarValoracion(valor);
+                });
+            });
+
+            function actualizarEstrellas(valor) {
+                estrellas.forEach(estrella => {
+                    const valorEstrella = parseInt(estrella.getAttribute('data-valor'));
+                    if (valorEstrella <= valor) {
+                        estrella.classList.add('filled');
+                    } else {
+                        estrella.classList.remove('filled');
+                    }
+                });
+            }
+
+            function enviarValoracion(valor) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '<%= request.getContextPath() %>/ValoracionController', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            valoracionActual = valor; // Actualizar la valoración del usuario
+                            valoracionMediaSpan.textContent = response.nuevaValoracionMedia.toFixed(1);
+                            actualizarEstrellas(valoracionActual);
+                        } else {
+                            alert('Error al enviar la valoración: ' + response.error);
+                        }
+                    }
+                };
+
+                const data = 'action=CrearOActualizarValoracion&idRuta=' + idRuta + '&valoracion=' + valor;
+                xhr.send(data);
+            }
         </script>
     <% 
         }
-    } %>
+     %>
 </body>
 </html>

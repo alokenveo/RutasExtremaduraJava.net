@@ -108,16 +108,16 @@ public class RutaController extends HttpServlet {
 		req.setAttribute("rutas", rutas);
 		req.getRequestDispatcher("./rutas.jsp").forward(req, res);
 	}
-	
+
 	public void mostrarRuta(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-	    String idRuta = req.getParameter("idRuta");
-	    Ruta ruta = rutaService.obtenerRutaPorId(idRuta);
-	    if (ruta != null) {
-	        req.setAttribute("ruta", ruta);
-	        req.getRequestDispatcher("./info_ruta.jsp").forward(req, res);
-	    } else {
-	        res.sendRedirect("rutas.jsp");
-	    }
+		String idRuta = req.getParameter("idRuta");
+		Ruta ruta = rutaService.obtenerRutaPorId(idRuta);
+		if (ruta != null) {
+			req.setAttribute("ruta", ruta);
+			req.getRequestDispatcher("./info_ruta.jsp").forward(req, res);
+		} else {
+			res.sendRedirect("rutas.jsp");
+		}
 	}
 
 	public void eliminarRuta(HttpServletRequest req, HttpServletResponse res) {

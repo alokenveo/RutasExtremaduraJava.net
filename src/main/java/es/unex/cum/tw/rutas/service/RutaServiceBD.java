@@ -186,4 +186,212 @@ public class RutaServiceBD implements RutaService {
 		return ruta;
 	}
 
+	@Override
+	public List<Ruta> obtenerUltimasRutas(int num) {
+		List<Ruta> rutas = new ArrayList<>();
+		ResultSet resultados = null;
+		Connection conn = null;
+		PreparedStatement sentencia1 = null;
+		PreparedStatement sentencia2 = null;
+
+		try {
+			conn = Conexion.openConnection();
+
+			// Obtener las rutas
+			String query1 = "SELECT * FROM rutas ORDER BY fechaIncorporacion DESC LIMIT ?";
+			sentencia1 = conn.prepareStatement(query1);
+			sentencia1.setInt(1, num);
+			resultados = sentencia1.executeQuery();
+
+			while (resultados.next()) {
+				Ruta ruta = new Ruta(resultados.getInt("idRuta"), resultados.getString("nombre"),
+						resultados.getString("descripcion"), resultados.getString("enlace"),
+						resultados.getDate("fechaIncorporacion"), resultados.getInt("maximoUsuario"),
+						resultados.getInt("dificultad"), resultados.getInt("metros"));
+
+				String query2 = "SELECT pathImagen FROM fotos_ruta WHERE idRuta=?";
+				sentencia2 = conn.prepareStatement(query2);
+				sentencia2.setInt(1, ruta.getIdRuta());
+				ResultSet fotosResultSet = sentencia2.executeQuery();
+
+				List<String> fotosRuta = new ArrayList<>();
+				while (fotosResultSet.next()) {
+					fotosRuta.add(fotosResultSet.getString("pathImagen"));
+				}
+
+				ruta.setFotos(fotosRuta);
+				rutas.add(ruta);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultados != null) {
+					resultados.close();
+				}
+				if (sentencia1 != null) {
+					sentencia1.close();
+				}
+				if (sentencia2 != null) {
+					sentencia2.close();
+				}
+			} catch (SQLException ex) {
+				Logger.getLogger(Ruta.class.getName()).log(Level.SEVERE, "No se pudieron cerrar los recursos", ex);
+			}
+		}
+
+		return rutas;
+	}
+
+	@Override
+	public List<Ruta> obtenerRutasPorDificultad() {
+		List<Ruta> rutas = new ArrayList<>();
+		ResultSet resultados = null;
+		Connection conn = null;
+		PreparedStatement sentencia1 = null;
+		PreparedStatement sentencia2 = null;
+
+		try {
+			conn = Conexion.openConnection();
+
+			// Obtener las rutas
+			String query1 = "SELECT * FROM rutas ORDER BY dificultad DESC";
+			sentencia1 = conn.prepareStatement(query1);
+			resultados = sentencia1.executeQuery();
+
+			while (resultados.next()) {
+				Ruta ruta = new Ruta(resultados.getInt("idRuta"), resultados.getString("nombre"),
+						resultados.getString("descripcion"), resultados.getString("enlace"),
+						resultados.getDate("fechaIncorporacion"), resultados.getInt("maximoUsuario"),
+						resultados.getInt("dificultad"), resultados.getInt("metros"));
+
+				String query2 = "SELECT pathImagen FROM fotos_ruta WHERE idRuta=?";
+				sentencia2 = conn.prepareStatement(query2);
+				sentencia2.setInt(1, ruta.getIdRuta());
+				ResultSet fotosResultSet = sentencia2.executeQuery();
+
+				List<String> fotosRuta = new ArrayList<>();
+				while (fotosResultSet.next()) {
+					fotosRuta.add(fotosResultSet.getString("pathImagen"));
+				}
+
+				ruta.setFotos(fotosRuta);
+				rutas.add(ruta);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultados != null) {
+					resultados.close();
+				}
+				if (sentencia1 != null) {
+					sentencia1.close();
+				}
+				if (sentencia2 != null) {
+					sentencia2.close();
+				}
+			} catch (SQLException ex) {
+				Logger.getLogger(Ruta.class.getName()).log(Level.SEVERE, "No se pudieron cerrar los recursos", ex);
+			}
+		}
+
+		return rutas;
+	}
+
+	@Override
+	public List<Ruta> obtenerRutasPorDistancia() {
+		List<Ruta> rutas = new ArrayList<>();
+		ResultSet resultados = null;
+		Connection conn = null;
+		PreparedStatement sentencia1 = null;
+		PreparedStatement sentencia2 = null;
+
+		try {
+			conn = Conexion.openConnection();
+
+			// TODO
+			String query1 = "SELECT * FROM rutas ORDER BY metros DESC";
+			sentencia1 = conn.prepareStatement(query1);
+			resultados = sentencia1.executeQuery();
+
+			while (resultados.next()) {
+				Ruta ruta = new Ruta(resultados.getInt("idRuta"), resultados.getString("nombre"),
+						resultados.getString("descripcion"), resultados.getString("enlace"),
+						resultados.getDate("fechaIncorporacion"), resultados.getInt("maximoUsuario"),
+						resultados.getInt("dificultad"), resultados.getInt("metros"));
+
+				String query2 = "SELECT pathImagen FROM fotos_ruta WHERE idRuta=?";
+				sentencia2 = conn.prepareStatement(query2);
+				sentencia2.setInt(1, ruta.getIdRuta());
+				ResultSet fotosResultSet = sentencia2.executeQuery();
+
+				List<String> fotosRuta = new ArrayList<>();
+				while (fotosResultSet.next()) {
+					fotosRuta.add(fotosResultSet.getString("pathImagen"));
+				}
+
+				ruta.setFotos(fotosRuta);
+				rutas.add(ruta);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultados != null) {
+					resultados.close();
+				}
+				if (sentencia1 != null) {
+					sentencia1.close();
+				}
+				if (sentencia2 != null) {
+					sentencia2.close();
+				}
+			} catch (SQLException ex) {
+				Logger.getLogger(Ruta.class.getName()).log(Level.SEVERE, "No se pudieron cerrar los recursos", ex);
+			}
+		}
+
+		return rutas;
+	}
+
+	@Override
+	public double obtenerValoracionMedia(int idRuta) {
+		PreparedStatement sentencia = null;
+		ResultSet rs = null;
+		Connection conn = null;
+		try {
+			conn = Conexion.openConnection();
+			String query = "SELECT AVG(valoracion) as media FROM valoraciones WHERE idRuta = ?";
+			sentencia = conn.prepareStatement(query);
+			sentencia.setInt(1, idRuta);
+			rs = sentencia.executeQuery();
+			if (rs.next()) {
+				return rs.getDouble("media");
+			}
+			return 0.0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0.0;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (sentencia != null) {
+				try {
+					sentencia.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }

@@ -47,7 +47,7 @@ public class UsuarioController extends HttpServlet {
 			logout(req, res);
 		} else if (accion.equals("UsuarioAdmin")) {
 			obtenerDatos(req, res);
-		}  else if (accion.equals("UsuarioPerfil")) {
+		} else if (accion.equals("UsuarioPerfil")) {
 			obtenerDatosUsuario(req, res);
 		} else if (accion.equals("DeleteUsuario")) {
 			eliminarUsuario(req, res);
@@ -68,10 +68,10 @@ public class UsuarioController extends HttpServlet {
 				session.setAttribute("id", String.valueOf(usuario.getId()));
 				session.setAttribute("nombre", usuario.getNombre());
 				session.setAttribute("username", usuario.getUsername());
-				res.sendRedirect("index.jsp");
+				res.sendRedirect(req.getContextPath() + "/home");
 			} else {
-				res.sendRedirect("index.jsp");
-				return;
+				req.setAttribute("error", "Usuario o contraseña incorrectos");
+				req.getRequestDispatcher("./login.jsp").forward(req, res);
 			}
 		} catch (Exception e2) {
 			req.setAttribute("error", "Autenticacion correcta");
@@ -84,9 +84,10 @@ public class UsuarioController extends HttpServlet {
 		session.invalidate();
 		res.sendRedirect("login.jsp");
 	}
-	
-	public void registroNormal(HttpServletRequest req, HttpServletResponse res) throws ParseException, ServletException, IOException {
-		if(registrar(req, res)) {
+
+	public void registroNormal(HttpServletRequest req, HttpServletResponse res)
+			throws ParseException, ServletException, IOException {
+		if (registrar(req, res)) {
 			req.setAttribute("mensaje", "Dado de alta correctamente");
 			req.getRequestDispatcher("./login.jsp").forward(req, res);
 		} else {
@@ -94,8 +95,10 @@ public class UsuarioController extends HttpServlet {
 			req.getRequestDispatcher("./registro.jsp").forward(req, res);
 		}
 	}
-	public void registroAdmin(HttpServletRequest req, HttpServletResponse res) throws ParseException, ServletException, IOException {
-		if(registrar(req, res)) {
+
+	public void registroAdmin(HttpServletRequest req, HttpServletResponse res)
+			throws ParseException, ServletException, IOException {
+		if (registrar(req, res)) {
 			obtenerDatos(req, res);
 		} else {
 			req.setAttribute("error", "No se ha guardado el archivo");
@@ -112,7 +115,7 @@ public class UsuarioController extends HttpServlet {
 		String pass = req.getParameter("password");
 		Date fecha = Date.valueOf(req.getParameter("fechaNacimiento"));
 		Usuario usuario1 = new Usuario(n, apel, email, username, pass, fecha);
-		
+
 		return usuarioService.registrarUsuario(usuario1);
 	}
 
@@ -126,14 +129,14 @@ public class UsuarioController extends HttpServlet {
 		req.setAttribute("reservas", reservas);
 		req.getRequestDispatcher("./administrador.jsp").forward(req, res);
 	}
-	
-	private void obtenerDatosUsuario(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		HttpSession session=req.getSession(true);
-		int idUsuario=Integer.parseInt((String)session.getAttribute("id"));
+
+	private void obtenerDatosUsuario(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		HttpSession session = req.getSession(true);
+		int idUsuario = Integer.parseInt((String) session.getAttribute("id"));
 		List<ReservaRuta> reservas = reservaService.obtenerReservasConRutaPorUsuario(idUsuario);
-		Usuario usuario=usuarioService.getUserByUserId(String.valueOf(idUsuario));
-		
-		
+		Usuario usuario = usuarioService.getUserByUserId(String.valueOf(idUsuario));
+
 		req.setAttribute("usuario", usuario);
 		req.setAttribute("reservas", reservas);
 		req.getRequestDispatcher("./perfil.jsp").forward(req, res);
@@ -142,10 +145,10 @@ public class UsuarioController extends HttpServlet {
 	public void eliminarUsuario(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String idUsuario = req.getParameter("idUsuario");
 		boolean borrado = usuarioService.eliminarUsuario(idUsuario);
-		if(!borrado) {
+		if (!borrado) {
 			req.setAttribute("error", "No se ha podido eliminar al usuario");
 		}
-		
+
 		obtenerDatos(req, res);
 	}
 

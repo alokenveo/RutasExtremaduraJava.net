@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="es.unex.cum.tw.rutas.model.Ruta" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,128 +13,122 @@
 </head>
 
 <body>
-    <%
-    if (session.getAttribute("nombre")==null)   {
-        response.sendRedirect("login.jsp");
-    } else {
-    %>
 
-        <!-- Cabecera -->
-        <%@ include file="header.jsp"%>
+    <!-- Cabecera -->
+    <%@ include file="header.jsp"%>
 
-        <main>
-            <section id="carrusel">
-                <div class="carrusel-container">
-                    <img id="imagen-carrusel" src="" alt="Imagen del carrusel">
-                </div>
-            </section>
+    <main>
+        <section id="carrusel">
+            <div class="carrusel-container">
+                <img id="imagen-carrusel" src="" alt="Imagen del carrusel">
+            </div>
+        </section>
 
-            <section id="rutas">
-                <!-- Novedades: Últimas 5 rutas añadidas -->
-                <div class="seccion-rutas">
-                    <h2>Últimas Novedades</h2>
-                    <div class="lista-rutas">
-                        <%
-                            List<Ruta> ultimasRutas = (List<Ruta>) request.getAttribute("ultimasRutas");
-                            if (ultimasRutas != null && !ultimasRutas.isEmpty()) {
-                                for (Ruta ruta : ultimasRutas) {
-                                    String primeraFoto = (ruta.getFotos() != null && !ruta.getFotos().isEmpty()) ? ruta.getFotos().get(0) : "";
-                                    double valoracionMedia = (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) != null ? (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) : 0.0;
-                        %>
-                            <div class="ruta-item">
-                                <img src="<%= request.getContextPath() %><%= primeraFoto %>" alt="Imagen de <%= ruta.getNombre() %>">
-                                <div class="ruta-info">
-                                    <a href="<%= request.getContextPath() %>/info_ruta.jsp?idRuta=<%= ruta.getIdRuta() %>">
-                                        <%= ruta.getNombre() %>
-                                    </a>
-                                    <span class="valoracion">
-                                        <i class="bi bi-star-fill"></i> <%= String.format("%.1f", valoracionMedia) %>
-                                    </span>
-                                </div>
+        <section id="rutas">
+            <!-- Novedades: Últimas 5 rutas añadidas -->
+            <div class="seccion-rutas">
+                <h2>Últimas Novedades</h2>
+                <div class="lista-rutas">
+                    <%
+                        List<Ruta> ultimasRutas = (List<Ruta>) request.getAttribute("ultimasRutas");
+                        if (ultimasRutas != null && !ultimasRutas.isEmpty()) {
+                            for (Ruta ruta : ultimasRutas) {
+                                String primeraFoto = (ruta.getFotos() != null && !ruta.getFotos().isEmpty()) ? ruta.getFotos().get(0) : "";
+                                double valoracionMedia = (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) != null ? (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) : 0.0;
+                    %>
+                        <div class="ruta-item">
+                            <img src="<%= request.getContextPath() %><%= primeraFoto %>" alt="Imagen de <%= ruta.getNombre() %>">
+                            <div class="ruta-info">
+                                <a href="<%= request.getContextPath() %>/RutaController?action=VerRuta&idRuta=<%= ruta.getIdRuta() %>">
+                                    <%= ruta.getNombre() %>
+                                </a>
+                                <span class="valoracion">
+                                    <i class="bi bi-star-fill"></i> <%= String.format("%.1f", valoracionMedia) %>
+                                </span>
                             </div>
-                        <%
-                                }
-                            } else {
-                        %>
-                            <p>No hay novedades disponibles.</p>
-                        <%
+                        </div>
+                    <%
                             }
-                        %>
-                    </div>
+                        } else {
+                    %>
+                        <p>No hay novedades disponibles.</p>
+                    <%
+                        }
+                    %>
                 </div>
+            </div>
 
-                <!-- Rutas por dificultad -->
-                <div class="seccion-rutas">
-                    <h2>Rutas por Dificultad</h2>
-                    <div class="lista-rutas">
-                        <%
-                            List<Ruta> rutasPorDificultad = (List<Ruta>) request.getAttribute("rutasPorDificultad");
-                            if (rutasPorDificultad != null && !rutasPorDificultad.isEmpty()) {
-                                for (Ruta ruta : rutasPorDificultad) {
-                                    String primeraFoto = (ruta.getFotos() != null && !ruta.getFotos().isEmpty()) ? ruta.getFotos().get(0) : "";
-                                    double valoracionMedia = (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) != null ? (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) : 0.0;
-                        %>
-                            <div class="ruta-item">
-                                <img src="<%= request.getContextPath() %><%= primeraFoto %>" alt="Imagen de <%= ruta.getNombre() %>">
-                                <div class="ruta-info">
-                                    <a href="<%= request.getContextPath() %>/info_ruta.jsp?idRuta=<%= ruta.getIdRuta() %>">
-                                        <%= ruta.getNombre() %>
-                                    </a>
-                                    <span class="valoracion">
-                                        <i class="bi bi-star-fill"></i> <%= String.format("%.1f", valoracionMedia) %>
-                                    </span>
-                                </div>
+            <!-- Rutas por dificultad -->
+            <div class="seccion-rutas">
+                <h2>Rutas por Dificultad</h2>
+                <div class="lista-rutas">
+                    <%
+                        List<Ruta> rutasPorDificultad = (List<Ruta>) request.getAttribute("rutasPorDificultad");
+                        if (rutasPorDificultad != null && !rutasPorDificultad.isEmpty()) {
+                            for (Ruta ruta : rutasPorDificultad) {
+                                String primeraFoto = (ruta.getFotos() != null && !ruta.getFotos().isEmpty()) ? ruta.getFotos().get(0) : "";
+                                double valoracionMedia = (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) != null ? (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) : 0.0;
+                    %>
+                        <div class="ruta-item">
+                            <img src="<%= request.getContextPath() %><%= primeraFoto %>" alt="Imagen de <%= ruta.getNombre() %>">
+                            <div class="ruta-info">
+                                <a href="<%= request.getContextPath() %>/RutaController?action=VerRuta&idRuta=<%= ruta.getIdRuta() %>">
+                                    <%= ruta.getNombre() %>
+                                </a>
+                                <span class="valoracion">
+                                    <i class="bi bi-star-fill"></i> <%= String.format("%.1f", valoracionMedia) %>
+                                </span>
                             </div>
-                        <%
-                                }
-                            } else {
-                        %>
-                            <p>No hay rutas disponibles.</p>
-                        <%
+                        </div>
+                    <%
                             }
-                        %>
-                    </div>
+                        } else {
+                    %>
+                        <p>No hay rutas disponibles.</p>
+                    <%
+                        }
+                    %>
                 </div>
+            </div>
 
-                <!-- Rutas por distancia -->
-                <div class="seccion-rutas">
-                    <h2>Rutas por Distancia</h2>
-                    <div class="lista-rutas">
-                        <%
-                            List<Ruta> rutasPorDistancia = (List<Ruta>) request.getAttribute("rutasPorDistancia");
-                            if (rutasPorDistancia != null && !rutasPorDistancia.isEmpty()) {
-                                for (Ruta ruta : rutasPorDistancia) {
-                                    String primeraFoto = (ruta.getFotos() != null && !ruta.getFotos().isEmpty()) ? ruta.getFotos().get(0) : "";
-                                    double valoracionMedia = (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) != null ? (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) : 0.0;
-                        %>
-                            <div class="ruta-item">
-                                <img src="<%= request.getContextPath() %><%= primeraFoto %>" alt="Imagen de <%= ruta.getNombre() %>">
-                                <div class="ruta-info">
-                                    <a href="<%= request.getContextPath() %>/info_ruta.jsp?idRuta=<%= ruta.getIdRuta() %>">
-                                        <%= ruta.getNombre() %>
-                                    </a>
-                                    <span class="valoracion">
-                                        <i class="bi bi-star-fill"></i> <%= String.format("%.1f", valoracionMedia) %>
-                                    </span>
-                                </div>
+            <!-- Rutas por distancia -->
+            <div class="seccion-rutas">
+                <h2>Rutas por Distancia</h2>
+                <div class="lista-rutas">
+                    <%
+                        List<Ruta> rutasPorDistancia = (List<Ruta>) request.getAttribute("rutasPorDistancia");
+                        if (rutasPorDistancia != null && !rutasPorDistancia.isEmpty()) {
+                            for (Ruta ruta : rutasPorDistancia) {
+                                String primeraFoto = (ruta.getFotos() != null && !ruta.getFotos().isEmpty()) ? ruta.getFotos().get(0) : "";
+                                double valoracionMedia = (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) != null ? (Double) request.getAttribute("valoracion_" + ruta.getIdRuta()) : 0.0;
+                    %>
+                        <div class="ruta-item">
+                            <img src="<%= request.getContextPath() %><%= primeraFoto %>" alt="Imagen de <%= ruta.getNombre() %>">
+                            <div class="ruta-info">
+                                <a href="<%= request.getContextPath() %>/RutaController?action=VerRuta&idRuta=<%= ruta.getIdRuta() %>">
+                                    <%= ruta.getNombre() %>
+                                </a>
+                                <span class="valoracion">
+                                    <i class="bi bi-star-fill"></i> <%= String.format("%.1f", valoracionMedia) %>
+                                </span>
                             </div>
-                        <%
-                                }
-                            } else {
-                        %>
-                            <p>No hay rutas disponibles.</p>
-                        <%
+                        </div>
+                    <%
                             }
-                        %>
-                    </div>
+                        } else {
+                    %>
+                        <p>No hay rutas disponibles.</p>
+                    <%
+                        }
+                    %>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
+    </main>
 
-        <!-- Pie de página -->
-        <%@ include file="footer.jsp"%>
+    <!-- Pie de página -->
+    <%@ include file="footer.jsp"%>
 
-    <%} %>
 
     <script>
         const imagenes = [
