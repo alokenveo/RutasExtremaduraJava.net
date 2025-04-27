@@ -1,7 +1,7 @@
 <div id="header">
     <div id="logo">
         <a href="<%= request.getContextPath() %>" title="Ir a la página principal">
-            <img src="img/logo.png" alt="Logo Portal">
+            <img src="${pageContext.request.contextPath}/img/logo.png" alt="Logo Portal">
             <h1>Rutas Extremadura.net</h1>
         </a>
     </div>

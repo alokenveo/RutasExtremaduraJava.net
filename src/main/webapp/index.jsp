@@ -8,7 +8,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio | Rutas Extremadura.net</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
