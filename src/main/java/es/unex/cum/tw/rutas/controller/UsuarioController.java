@@ -68,7 +68,7 @@ public class UsuarioController extends HttpServlet {
 				session.setAttribute("id", String.valueOf(usuario.getId()));
 				session.setAttribute("nombre", usuario.getNombre());
 				session.setAttribute("username", usuario.getUsername());
-				res.sendRedirect(req.getContextPath() + "/home");
+				res.sendRedirect(req.getContextPath() + "/");
 			} else {
 				req.setAttribute("error", "Usuario o contraseña incorrectos");
 				req.getRequestDispatcher("./login.jsp").forward(req, res);

@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.unex.cum.tw.rutas.model.Ruta" %>
+<%@ page import="es.unex.cum.tw.rutas.service.RutaService" %>
+<%@ page import="es.unex.cum.tw.rutas.service.RutaServiceBD" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,6 +20,34 @@
     <%@ include file="header.jsp"%>
 
     <main>
+        <%
+            // Obtener las listas de rutas
+            RutaService rutaService = new RutaServiceBD();
+            List<Ruta> ultimas = rutaService.obtenerUltimasRutas(5);
+            List<Ruta> rutasDificultad = rutaService.obtenerRutasPorDificultad();
+            List<Ruta> rutasDistancia = rutaService.obtenerRutasPorDistancia();
+
+            // Calcular valoraciones para cada lista
+            for (Ruta ruta : ultimas) {
+                double valoracion = rutaService.obtenerValoracionMedia(ruta.getIdRuta());
+                request.setAttribute("valoracion_" + ruta.getIdRuta(), valoracion);
+            }
+            for (Ruta ruta : rutasDificultad) {
+                double valoracion = rutaService.obtenerValoracionMedia(ruta.getIdRuta());
+                request.setAttribute("valoracion_" + ruta.getIdRuta(), valoracion);
+            }
+            for (Ruta ruta : rutasDistancia) {
+                double valoracion = rutaService.obtenerValoracionMedia(ruta.getIdRuta());
+                request.setAttribute("valoracion_" + ruta.getIdRuta(), valoracion);
+            }
+
+            // Pasar las listas al JSP
+            request.setAttribute("ultimasRutas", ultimas);
+            request.setAttribute("rutasPorDificultad", rutasDificultad);
+            request.setAttribute("rutasPorDistancia", rutasDistancia);
+        %>
+
+
         <section id="carrusel">
             <div class="carrusel-container">
                 <img id="imagen-carrusel" src="" alt="Imagen del carrusel">

@@ -1,6 +1,6 @@
 <div id="header">
     <div id="logo">
-        <a href="<%= request.getContextPath() %>" title="Ir a la pÃ¡gina principal">
+        <a href="<%= request.getContextPath() %>" title="Ir a la página principal">
             <img src="${pageContext.request.contextPath}/img/logo.png" alt="Logo Portal">
             <h1>Rutas Extremadura.net</h1>
         </a>
@@ -14,7 +14,6 @@
                     <input type="hidden" name="action" value="VerRutas"/>
                 </form>
             </li>
-            <li><a href="/src/html/bibliografia.jsp">Bibliografï¿½a</a></li>
 
             <% 
             String username = (String) session.getAttribute("username");
@@ -44,7 +43,7 @@
                         <form action="UsuarioController" method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="UsuarioLogout" />
                             <button type="submit" style="background: none; border: none; padding: 0; color: inherit; font: inherit; cursor: pointer;">
-                                <i class="bi bi-box-arrow-right"></i> Cerrar sesiÃ³n
+                                <i class="bi bi-box-arrow-right"></i> Cerrar sesión
                             </button>
                         </form>
                     </li>

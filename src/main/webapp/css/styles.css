@@ -160,57 +160,6 @@ main h1 {
     color: #FFD700; /* Color dorado para la estrella */
 }
 
-/*-------------------BIBLIOGRAFÍA------------------*/
-#ia {
-    margin-top: 40px;
-}
-
-#ia h2 {
-    text-align: left;
-    padding-left: 10px;
-    text-decoration: underline;
-}
-
-.consultas-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.consulta {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-.consulta-imagenes {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    justify-content: center;
-}
-
-.consulta-imagenes img {
-    height: 300px;
-    border-radius: 5px;
-}
-
-.consulta h3 {
-    margin: 10px 0;
-    color: #103F91;
-    font-weight: bold;
-}
-
-.consulta p {
-    color: #333;
-    background: #F3F3F3;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: justify;
-    margin-bottom: 15px;
-}
-
 
 /*-------------------HEADER------------------*/
 /* Estilos generales del header */
@@ -263,7 +212,7 @@ nav ul li ul {
     background-color: #0D326F;
     padding: 10px;
     top: 100%;
-    left: 0;
+    right: 0;
     min-width: 150px;
 }
 
